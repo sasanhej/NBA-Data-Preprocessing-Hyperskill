@@ -1,0 +1,12 @@
+<h2>Unsupervised algorithm</h2>
+<div class="step-text">
+<p></p>
+<p>K-means is one of the best-known techniques for clustering which bases itself on the idea of unsupervised learning. Suppose we want to train the K-means model on the <a href="https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html" rel="noopener noreferrer nofollow" target="_blank">built-in Iris dataset</a>. We loaded it using <code class="language-python">load_iris()</code> and saved the feature matrix to <code class="language-python">X</code> and the target values to <code class="language-python">y</code>.</p>
+<pre><code class="language-python">from sklearn.cluster import KMeans
+from sklearn import datasets
+
+X, y = datasets.load_iris(return_X_y=True)
+k_means = KMeans()
+k_means.fit(y)</code></pre>
+<p>Then we fitted the model on the data. However, there is one mistake in the code. Recall which data we need for unsupervised learning, correct the line and print the corrected line in the text field below.</p>
+</div>

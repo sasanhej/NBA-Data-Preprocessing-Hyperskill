@@ -1,0 +1,31 @@
+type: dataset
+files:
+- name: main.py
+  visible: true
+  text: "#  write your code here \n\n"
+  learner_created: false
+- name: data/sample/input.txt
+  visible: true
+  text: |
+    X,y
+    9,0.22733602
+    9,0.31675834
+    7,0.79736546
+    7,0.67625467
+    2,0.39110955
+    1,0.33281393
+    3,0.59830875
+    4,0.18673419
+    1,0.67275604
+    8,0.94180287
+    5,0.24824571
+  learner_created: false
+- name: data/dataset/input.txt
+  visible: true
+  learner_created: true
+feedback_link: https://hyperskill.org/learn/step/14685#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Fri, 26 May 2023 22:09:43 UTC"
+record: -1

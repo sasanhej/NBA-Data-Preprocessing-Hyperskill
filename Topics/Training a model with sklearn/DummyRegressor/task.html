@@ -1,0 +1,14 @@
+<div class="step-text">
+<p></p>
+<p></p><div class="alert alert-warning">Please note: for now, when you go to the tab IDE, you can solve this problem only via Pycharm. We are sorry for the inconvenience, we will fix this as soon as we can. If you prefer to solve the problem via a different IDE, you should open it manually and then copy the solution to the website.</div><p></p>
+<p>You are given a dataset.</p>
+<p>0. Load the dataset. You can use for this the code snippet below (pandas must be installed on your machine):</p>
+<pre><code class="java">import pandas as pd
+
+df = pd.read_csv('file_path\file_name.txt')</code></pre>
+<p>1. Train the <code class="java">DummyRegressor</code> on the training data <code class="java">df["X"]</code> and the target data <code class="java">df["y"]</code> </p>
+<p>2. Predict the result for the data stored in <code class="java">X</code> </p>
+<p>3. Round <strong>the first element</strong> of the resulting array to<strong> 4 decimal places</strong> and insert it in the answer field.</p>
+<p>Pass the following parameters to the <code class="java">DummyRegressor</code> : <code class="java"><samp>strategy='quantile', quantile=0.4</samp></code></p>
+<p><b>Tip:</b>  You need to insert the answer without rounding it. In the resulting array all values are rounded to 8th decimal place, so don't just copy the first element from the whole array, but call it separately (e.g. using index selection). </p><br><b>Sample Input:</b><br><pre><code class="language-no-highlight">X,y<br>9,0.22733602<br>9,0.31675834<br>7,0.79736546<br>7,0.67625467<br>2,0.39110955<br>1,0.33281393<br>3,0.59830875<br>4,0.18673419<br>1,0.67275604<br>8,0.94180287<br>5,0.24824571<br></code></pre><br><b>Sample Output:</b><br><pre><code class="language-no-highlight">0.3328</code></pre><br><br>
+</div>

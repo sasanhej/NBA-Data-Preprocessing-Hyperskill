@@ -1,0 +1,54 @@
+<h2>Training a model with sklearn</h2>
+<div class="step-text">
+<p>Previously, we looked through the common ML pipeline. To recall, in an ML project we typically go through the following stages: data collection and preprocessing, exploratory data analysis (EDA), modeling, and deployment. In this topic, we will focus on modeling. You will learn the basic principles of training and using ML models with the <code class="language-python">sklearn</code> library.</p>
+<h5 id="basic-setting">Basic setting</h5>
+<p><code class="language-python">sklearn</code> has lots of ML models to offer. The process of setting and training is the same for all of them:</p>
+<ul>
+<li>Import the model class, create an instance of it, and adjust the model parameters,</li>
+<li>Load the dataset and fit the model to it, in other words, train the model on the dataset,</li>
+<li>Use the model to predict values.</li>
+</ul>
+<p>Let's look at the <code class="language-python">DummyRegressor</code> model. The <code class="language-python">DummyRegressor</code> is the simplest prediction model that can predict the mean, the median, the quantile of the target values of the training dataset, or the constant value that has been passed by a user. In real-world tasks, it serves merely as a basis for comparison with other models.</p>
+<p>The process of working with a certain model in <code class="language-python">sklearn</code> starts with importing the class:</p>
+<pre><code class="language-python">from sklearn.dummy import DummyRegressor</code></pre>
+<p>Then, we create an instance of the class. We indicate parameters that are individual for every model in <code class="language-python">sklearn</code>. In <code class="language-python">DummyRegressor</code>, we can specify the strategy used to predict: the mean, the median, the quantile, or the constant value. If not specified, the training will continue with the default parameters (the default one here is 'mean').</p>
+<pre><code class="language-python">dummy_regressor = DummyRegressor(strategy='median')</code></pre>
+<h5 id="fitting-the-model">Fitting the model</h5>
+<p>Now, we need to load the data and train the model on it. There are several formats in which we can load the data: <code class="language-python">NumPy arrays</code>, <code class="language-python">SciPy matrices</code>, and other data types that can be converted to a numeric format such as <code class="language-python">Pandas DataFrames</code>. There are also a number of <a href="https://scikit-learn.org/stable/datasets.html" rel="noopener noreferrer nofollow" target="_blank">built-in datasets</a> in the sklearn library. We will use one of them, the <a href="https://scikit-learn.org/stable/datasets/toy_dataset.html#boston-house-prices-dataset" rel="noopener noreferrer nofollow" target="_blank">Boston house prices dataset</a>. It consists of 506 rows and 14 columns with observations of different houses in Boston: from crime rate by town to the index of accessibility to highways and average prices.</p>
+<p>We will use the data stored in these 14 columns for the training. We need to transform it into the training data (usually designated as <code class="language-python">X</code>) and its training labels (designated as <code class="language-python">y</code>). During the training, the data stored in <code class="language-python">y</code> becomes our target that we want to predict based on the information stored in <code class="language-python">X</code>.</p>
+<p>In this dataset, <code class="language-python">X</code> contains 13 features, such as crime rate by town, nitric oxide concentration, an average number of rooms per dwelling, etc. The target array <code class="language-python">y</code> represents one feature, a median value of owner-occupied homes in $1000s. To load the dataset, we need to use the <code class="language-python">load_boston()</code> method. Then we need to set the <code class="language-python">return_X_y</code> parameter, so that the dataset will be returned divided into the feature matrix <code class="language-python">X</code> and the training labels <code class="language-python">y</code>.</p>
+<pre><code class="language-python">from sklearn import datasets
+
+X, y = datasets.load_boston(return_X_y=True)</code></pre>
+<p>Now, we need to fit the model on our dataset. To <strong>fit</strong> a model is to apply it to data so that the model will learn patterns from it. The models are often applied to newer observations similar to the ones we had as the training data. As a result of the training, the model should successfully describe relationships and patterns in the data.</p>
+<p><code class="language-python">sklearn</code> provides the <code class="language-python">fit()</code> method. The method usually requires two arguments: the feature matrix and its target array if we work with a supervised model. If we work with an unsupervised model, the training data will be enough. In unsupervised learning, we needn't annotate the data as we don't regard its labels while training. Here, we pass the variables <code class="language-python">X</code> and <code class="language-python">y</code> as arguments to the method:</p>
+<pre><code class="language-python">dummy_regressor.fit(X, y)
+
+# DummyRegressor(strategy='median')</code></pre>
+<p>Mind that <code class="language-python">fit()</code> returns the <code class="language-python">DummyRegressor</code> object with all the specified parameters represented as a string. The sklearn object trained with <code class="language-python">fit()</code>  has a number of model-specific attributes that can be called by adding an underscore to an attribute name. For example, our model has 2 attributes -  <code class="language-python">.constant_</code><strong> </strong>(mean or median or quantile of the training targets or some by user given value) and <code class="language-python">.n_outputs_</code> (number of outputs). Let's call one of them:</p>
+<pre><code class="language-python">dummy_regressor.n_outputs_
+
+# 1</code></pre>
+<h5 id="prediction">Prediction</h5>
+<p>Once we have trained the model we can use it to predict future observations. Usually, to check how well the model performs, the initial data is divided into two parts — the test set and the training set. We use the test set to compare the predicted values with the actual target values. We will discuss it more thoroughly in the following topics and hence won't follow this approach here.</p>
+<p>To apply the trained model to a dataset, we need the <code class="language-python">predict()</code> method. By calling the method, we get the predicted target values based on the training data. For our training data, stored in <code class="language-python">X</code>, we get the following results:</p>
+<pre><code class="language-python">dummy_regressor.predict(X)
+
+# array([21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2,
+#        21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2,
+#        21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2,
+#        ...
+#        21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2,
+#        21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2,
+#        21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2, 21.2])</code></pre>
+<p>So, the median price for all the houses equals <code class="language-python">21.2</code>.</p>
+<p>We could also apply the trained model to some new data, though in the case of the <code class="language-python">DummyRegressor</code> it doesn't make sense: this particular model will always return the predicted values for the dataset it has been trained on. Even though the <code class="language-python">DummyRegressor</code> is never used in real tasks for any other purpose than comparison, it is a valid example of the use of the <code class="language-python">fit()</code> and <code class="language-python">predict()</code> methods.</p>
+<h5 id="conclusion">Conclusion</h5>
+<p>In this topic, we went through the main stages of adjusting, training, and using an ML model in <code class="language-python">sklearn</code>. Let's revise what we learned:</p>
+<ul>
+<li>The process of working with a model starts with importing the class with the corresponding name, creating an instance of that class, and specifying the required parameters. The parameters are specific for all models.</li>
+<li>Next, we load the dataset we want to train our model on: most often, it is usually passed as <code class="language-python">NumPy arrays</code>, <code class="language-python">SciPy matrices</code>, and <code class="language-python">Pandas DataFrames</code>.</li>
+<li>The training process is done with the aid of the <code class="language-python">fit()</code> method.</li>
+<li>After training, we can use the model to predict values in future observations: in <code class="language-python">sklearn</code>, there is the <code class="language-python">predict()</code> method for this purpose.</li>
+</ul>
+</div>
